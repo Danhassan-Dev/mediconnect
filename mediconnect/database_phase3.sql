@@ -1,0 +1,13 @@
+USE mediconnect;
+CREATE TABLE IF NOT EXISTS doctor_availability (
+ id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ doctor_id BIGINT UNSIGNED NOT NULL,
+ weekday TINYINT UNSIGNED NOT NULL,
+ start_time TIME NOT NULL,
+ end_time TIME NOT NULL,
+ is_available TINYINT(1) NOT NULL DEFAULT 1,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY (doctor_id) REFERENCES users(id) ON DELETE CASCADE,
+ INDEX idx_doctor_weekday (doctor_id, weekday)
+) ENGINE=InnoDB;
+ALTER TABLE doctor_profiles ADD COLUMN IF NOT EXISTS years_experience SMALLINT UNSIGNED NULL;
